@@ -11,26 +11,6 @@ def repo(){
  return 'fabric8io/pipeline-test-project'
 }
 
-def updateDependencies(source){
-
-  def properties = []
-  properties << ['<pipeline.test.project.dependency.version>','io/fabric8/pipeline-test-project-dependency']
-  properties << ['<docker.maven.plugin.version>','io/fabric8/docker-maven-plugin']
-
-  updatePropertyVersion{
-    updates = properties
-    repository = source
-    project = repo()
-  }
-}
-
-def pushDependencyUpdates(newVersion){
-  def parentPomProjects = ['fabric8-quickstarts/funktion-nodejs-example','fabric8-quickstarts/funktion-kotlin-example','fabric8-quickstarts/funktion-java-example','fabric8-quickstarts/funktion-groovy-example']
-  pushParentPomVersionChangePR{
-    projects = parentPomProjects
-    version = newVersion
-  }
-}
 def stage(){
   return stageProject{
     project = repo()
@@ -45,7 +25,7 @@ def deploy(project){
   //  resourceLocation = 'target/classes/kubernetes.json'
   //  environment = 'fabric8'
   //}
-  echo 'unable to deoploy on plain kuberentes see https://github.com/fabric8io/kubernetes-client/issues/437'
+  echo 'unable to deploy on plain kuberentes see https://github.com/fabric8io/kubernetes-client/issues/437'
 }
 
 def approveRelease(project){
