@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 @Library('github.com/iocanel/fabric8-pipeline-library@master')
 def test = 'dummy'
-maven(['image': 'maven:3.3.9-jdk-7']) {
+maven(profiles: 'base') {
   checkout scm
   sh "git remote set-url origin git@github.com:fabric8io/pipeline-test-project.git"
 
