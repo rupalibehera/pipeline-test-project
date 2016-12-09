@@ -2,21 +2,22 @@
 @Library('github.com/rawlingsj/fabric8-pipeline-library@master')
 def test = 'dummy'
 mavenNode {
-  checkout scm
-  sh "git remote set-url origin git@github.com:fabric8io/pipeline-test-project.git"
+  dockerNode {
+    checkout scm
+    sh "git remote set-url origin git@github.com:fabric8io/pipeline-test-project.git"
 
-  def pipeline = load 'release.groovy'
+    def pipeline = load 'release.groovy'
 
-  stage 'Stage'
-  def stagedProject = pipeline.stage()
-  
-  stage 'Deploy'
-  pipeline.deploy(stagedProject)
-  
-  stage 'Approve'
-  pipeline.approveRelease(stagedProject)
-  
-  stage 'Promote'
-  pipeline.release(stagedProject)
-  
+    stage 'Stage'
+    def stagedProject = pipeline.stage()
+    
+    stage 'Deploy'
+    pipeline.deploy(stagedProject)
+    
+    stage 'Approve'
+    pipeline.approveRelease(stagedProject)
+    
+    stage 'Promote'
+    pipeline.release(stagedProject)
+  }  
 }
