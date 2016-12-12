@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 @Library('github.com/rawlingsj/fabric8-pipeline-library@master')
-def test = 'dummy'
+def dummy
 mavenNode {
   dockerNode {
     checkout scm
