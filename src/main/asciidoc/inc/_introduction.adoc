@@ -1,0 +1,12 @@
+
+= Introduction
+
+https://github.com/fabric8io/fabric8-pipeline-library[fabric8 Pipeline Library] is repository
+of reusable https://jenkins.io/doc/book/pipeline/[Jenkins Pipline] steps and functions that can be used in your Jenkinsfile to help
+improve your Continuous Delivery Pipeline
+
+== Using the pipeline
+
+To use the functions in this library just add the following line to the top of your Jeninsfile:
+
+    @Library('github.com/fabric8io/fabric8-pipeline-library@master')
