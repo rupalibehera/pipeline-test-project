@@ -64,27 +64,12 @@ def mergePullRequest(prId) {
 }
 
 def documentation(project) {
-  helmPush = false
-  def releaseVersion = project[1]
   Model m = readMavenPom file: 'pom.xml'
-  // checkout latest the release version
-  checkout scm: [$class          : 'GitSCM',
-                 useRemoteConfigs: [[url: 'https://github.com/' + repo()]],
-                 branches        : [[name: 'refs/tags/v' + releaseVersion]]],
-    changelog: false, poll: false
-  // Run documentation goals
-  withMaven {
-    sh 'mvn -Pdoc-html'
-    sh 'mvn -Pdoc-pdf'
+  generateWebsiteDocs {
+    project = project[0]
+    releaseVersion = project[1]
+    artifactId = m.artifactId
   }
-  // now clone the gh-pages
-  sh 'git clone -b gh-pages' + 'https://github.com/' + repo() + ' gh-pages'
-  sh 'cp -rv target/generated-docs/* gh-pages/'
-  sh 'cd gh-pages'
-  sh 'mv index.pdf ' + m.artifactId + '.pdf'
-  sh 'git add --ignore-errors *'
-  sh 'git commit -m "generated documentation'
-  sh 'git push origin gh-pages'
 }
 
 return this;
