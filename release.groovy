@@ -73,8 +73,10 @@ def documentation(project) {
                  branches        : [[name: 'refs/tags/v' + releaseVersion]]],
     changelog: false, poll: false
   // Run documentation goals
-  sh 'mvn -Pdoc-html'
-  sh 'mvn -Pdoc-pdf'
+  withMaven {
+    sh 'mvn -Pdoc-html'
+    sh 'mvn -Pdoc-pdf'
+  }
   // now clone the gh-pages
   sh 'git clone -b gh-pages' + 'https://github.com/' + repo() + ' gh-pages'
   sh 'cp -rv target/generated-docs/* gh-pages/'
