@@ -1,25 +1,26 @@
 #!/usr/bin/groovy
+
 def imagesBuiltByPipline() {
   return ['pipeline-test-project']
 }
 
-def externalImages(){
+def externalImages() {
   return ['pipeline-test-external-image']
 }
 
-def repo(){
- return 'fabric8io/pipeline-test-project'
+def repo() {
+  return 'fabric8io/pipeline-test-project'
 }
 
-def stage(){
-  return stageProject{
+def stage() {
+  return stageProject {
     project = repo()
     useGitTagForNextVersion = true
     extraImagesToStage = externalImages()
   }
 }
 
-def deploy(project){
+def deploy(project) {
   //deployProject{
   //  stagedProject = project
   //  resourceLocation = 'target/classes/kubernetes.json'
@@ -28,9 +29,9 @@ def deploy(project){
   echo 'unable to deploy on plain kuberentes see https://github.com/fabric8io/kubernetes-client/issues/437'
 }
 
-def approveRelease(project){
+def approveRelease(project) {
   def releaseVersion = project[1]
-  approve{
+  approve {
     room = null
     version = releaseVersion
     console = null
@@ -38,8 +39,8 @@ def approveRelease(project){
   }
 }
 
-def release(project){
-  releaseProject{
+def release(project) {
+  releaseProject {
     stagedProject = project
     useGitTagForNextVersion = true
     helmPush = false
@@ -54,8 +55,8 @@ def release(project){
   }
 }
 
-def mergePullRequest(prId){
-  mergeAndWaitForPullRequest{
+def mergePullRequest(prId) {
+  mergeAndWaitForPullRequest {
     project = repo()
     pullRequestId = prId
   }
@@ -63,23 +64,21 @@ def mergePullRequest(prId){
 }
 
 def documentation(project) {
-   helmPush = false
-   def releaseVersion = project[1]
-   Model m = readMavePom file: 'pom.xml'
-   {
-     git url: 'https://github.com/' + repo(), tag: releaseVersion
-     // Run the documentation on the release version
-     sh 'mvn -Pdoc-html'
-     sh 'mvn -Pdoc-pdf'
-     // now clone the gh-pages
-     sh 'git clone -b gh-pages' + 'https://github.com/' + repo() + ' gh-pages'
-     sh 'cp -rv target/generated-docs/* gh-pages/'
-     sh 'cd gh-pages'
-     sh 'mv index.pdf ' + m.artifactId + '.pdf'
-     sh 'git add --ignore-errors *'
-     sh 'git commit -m "generated documentation'
-     sh 'git push origin gh-pages'
-   }
+  helmPush = false
+  def releaseVersion = project[1]
+  Model m = readMavePom file: 'pom.xml'
+  git url: 'https://github.com/' + repo(), tag: releaseVersion
+  // Run the documentation on the release version
+  sh 'mvn -Pdoc-html'
+  sh 'mvn -Pdoc-pdf'
+  // now clone the gh-pages
+  sh 'git clone -b gh-pages' + 'https://github.com/' + repo() + ' gh-pages'
+  sh 'cp -rv target/generated-docs/* gh-pages/'
+  sh 'cd gh-pages'
+  sh 'mv index.pdf ' + m.artifactId + '.pdf'
+  sh 'git add --ignore-errors *'
+  sh 'git commit -m "generated documentation'
+  sh 'git push origin gh-pages'
 }
 
 return this;
