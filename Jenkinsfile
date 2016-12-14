@@ -18,10 +18,10 @@ mavenNode {
     pipeline.approveRelease(stagedProject)
 
     stage 'Documentation'
-    pipeline.generateDocs(stagedProject)
+    pipeline.documentation(stagedProject)
 
-    //stage 'Promote'
-    //pipeline.release(stagedProject)
+    stage 'Promote'
+    pipeline.release(stagedProject)
 
   }
 }

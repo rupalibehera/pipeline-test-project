@@ -62,23 +62,24 @@ def mergePullRequest(prId){
 
 }
 
-def generateDocs(project) {
+def documentation(project) {
    helmPush = false
    def releaseVersion = project[1]
    Model m = readMavePom file: 'pom.xml'
-   git url: 'https://github.com/'+repo(), tag: releaseVersion
-   // Run the documentation on the release version
-   sh 'mvn -Pdoc-html'
-   sh 'mvn -Pdoc-pdf'
-   // now clone the gh-pages
-   sh 'git clone -b gh-pages' + 'https://github.com/'+repo() +' gh-pages'
-   sh 'cp -rv target/generated-docs/* gh-pages/'
-   sh 'cd gh-pages'
-   sh 'mv index.pdf '+ m.artifactId+'.pdf'
-   sh 'git add --ignore-errors *'
-   sh 'git commit -m "generated documentation'
-   sh 'git push origin gh-pages'
-
+   {
+     git url: 'https://github.com/' + repo(), tag: releaseVersion
+     // Run the documentation on the release version
+     sh 'mvn -Pdoc-html'
+     sh 'mvn -Pdoc-pdf'
+     // now clone the gh-pages
+     sh 'git clone -b gh-pages' + 'https://github.com/' + repo() + ' gh-pages'
+     sh 'cp -rv target/generated-docs/* gh-pages/'
+     sh 'cd gh-pages'
+     sh 'mv index.pdf ' + m.artifactId + '.pdf'
+     sh 'git add --ignore-errors *'
+     sh 'git commit -m "generated documentation'
+     sh 'git push origin gh-pages'
+   }
 }
 
 return this;
