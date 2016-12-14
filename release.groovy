@@ -66,9 +66,13 @@ def mergePullRequest(prId) {
 def documentation(project) {
   helmPush = false
   def releaseVersion = project[1]
-  Model m = readMavePom file: 'pom.xml'
-  git url: 'https://github.com/' + repo(), tag: releaseVersion
-  // Run the documentation on the release version
+  Model m = readMavenPom file: 'pom.xml'
+  // checkout latest the release version
+  checkout scm: [$class          : 'GitSCM',
+                 useRemoteConfigs: [[url: 'https://github.com/' + repo()]],
+                 branches        : [[name: 'refs/tags/' + releaseVersion]]],
+    changelog: false, poll: false
+  // Run documentation goals
   sh 'mvn -Pdoc-html'
   sh 'mvn -Pdoc-pdf'
   // now clone the gh-pages
