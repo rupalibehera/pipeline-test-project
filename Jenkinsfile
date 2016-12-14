@@ -2,7 +2,7 @@
 @Library('github.com/kameshsampath/fabric8-pipeline-library@gen-website-docs')
 def dummy
 mavenNode {
-  dockerNode {
+  ws {
     checkout scm
     sh "git remote set-url origin git@github.com:kameshsampath/pipeline-test-project.git"
 
