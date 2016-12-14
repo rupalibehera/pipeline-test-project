@@ -70,7 +70,7 @@ def documentation(project) {
   // checkout latest the release version
   checkout scm: [$class          : 'GitSCM',
                  useRemoteConfigs: [[url: 'https://github.com/' + repo()]],
-                 branches        : [[name: 'refs/tags/' + releaseVersion]]],
+                 branches        : [[name: 'refs/tags/v' + releaseVersion]]],
     changelog: false, poll: false
   // Run documentation goals
   sh 'mvn -Pdoc-html'
