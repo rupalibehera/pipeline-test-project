@@ -10,14 +10,17 @@ mavenNode {
 
     stage 'Stage'
     def stagedProject = pipeline.stage()
-    
+
     stage 'Deploy'
     pipeline.deploy(stagedProject)
-    
+
     stage 'Approve'
     pipeline.approveRelease(stagedProject)
-    
+
+    stage 'Website'
+    pipeline.website(stagedProject)
+
     stage 'Promote'
     pipeline.release(stagedProject)
-  }  
+  }
 }
