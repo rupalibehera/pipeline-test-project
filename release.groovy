@@ -61,4 +61,14 @@ def mergePullRequest(prId){
   }
 
 }
-return this;
+
+def website(stagedProject) {
+  Model m = readMavenPom file: 'pom.xml'
+  def projectArtifactId = m.artifactId
+  genWebsiteDocs {
+    project = stagedProject
+    artifactId = projectArtifactId
+  }
+}
+
+return this
