@@ -14,8 +14,9 @@ mavenNode {
     stage 'Deploy'
     pipeline.deploy(stagedProject)
 
-    stage 'Approve'
-    pipeline.approveRelease(stagedProject)
+// Temporarily commented out since our proxy based approach doesn't allow for console based approval
+//   stage 'Approve'
+//   pipeline.approveRelease(stagedProject)
 
     stage 'Website'
     pipeline.website(stagedProject)
