@@ -1,0 +1,19 @@
+= fabric8 Pipeline Test Project
+fabric8 Team
+:revnumber: {version}
+:revdate: {localdate}
+:toc: macro
+:toclevels: 3
+:toc-title: Vert.x Maven Plugin
+:doctype: book
+:icons: font
+
+ifndef::ebook-format[:leveloffset: 1]
+
+(C) 2016 The original authors.
+
+ifdef::basebackend-html[toc::[]]
+
+:numbered:
+
+include::inc/_introduction.adoc[]
