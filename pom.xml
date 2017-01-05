@@ -288,6 +288,7 @@
               <sourceHighlighter>highlightjs</sourceHighlighter>
               <attributes>
                 <toc>left</toc>
+                <version>${project.version}</version>
               </attributes>
             </configuration>
           </plugin>
@@ -306,6 +307,9 @@
             <configuration>
               <backend>pdf</backend>
               <sourceHighlighter>rouge</sourceHighlighter>
+              <attributes>
+                <version>${project.version}</version>
+              </attributes>
             </configuration>
             <dependencies>
               <dependency>
