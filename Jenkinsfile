@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-@Library('github.com/fabric8io/fabric8-pipeline-library@master')
+@Library('github.com/rupalibehera/fabric8-pipeline-library@test-pipeline')
 def dummy
 mavenNode {
   dockerNode {
