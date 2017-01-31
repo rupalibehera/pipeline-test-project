@@ -4,7 +4,7 @@ def dummy
 mavenNode {
   dockerNode {
     checkout scm
-    sh "git remote set-url origin git@github.com:fabric8io/pipeline-test-project.git"
+    sh "git remote set-url origin git@github.com:rupalibehera/pipeline-test-project.git"
 
     def pipeline = load 'release.groovy'
 

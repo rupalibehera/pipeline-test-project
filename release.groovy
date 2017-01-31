@@ -8,7 +8,7 @@ def externalImages(){
 }
 
 def repo(){
- return 'fabric8io/pipeline-test-project'
+ return 'rupalibehera/pipeline-test-project'
 }
 
 def stage(){

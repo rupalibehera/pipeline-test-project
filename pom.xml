@@ -13,9 +13,9 @@
   <description>Demo project for Spring Boot</description>
 
   <scm>
-    <connection>scm:git:git@github.com:fabric8io/pipeline-test-project.git</connection>
-    <developerConnection>scm:git:git@github.com:fabric8io/pipeline-test-project.git</developerConnection>
-    <url>http://github.com/fabric8io/pipeline-test-project</url>
+    <connection>scm:git:git@github.com:rupalibehera/pipeline-test-project.git</connection>
+    <developerConnection>scm:git:git@github.com:rupalibehera/pipeline-test-project.git</developerConnection>
+    <url>http://github.com/rupalibehera/pipeline-test-project</url>
   </scm>
 
   <properties>
