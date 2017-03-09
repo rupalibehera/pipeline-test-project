@@ -1,0 +1,13 @@
+---
+buildName: "pipeline-test"
+links:
+  Git: "https://github.com/rupalibehera/pipeline-test-project.git"
+  Job: "http://192.168.42.12:30793/job/pipeline-test"
+  Production: "http://172.30.165.166:80/kubernetes/pods?namespace=default-prod"
+  Staging: "http://172.30.165.166:80/kubernetes/pods?namespace=default-staging"
+  Testing: "http://172.30.165.166:80/kubernetes/pods?namespace=default-testing"
+environments:
+  Testing: "default-testing"
+  Staging: "default-staging"
+  Production: "default-prod"
+useLocalFlow: true
